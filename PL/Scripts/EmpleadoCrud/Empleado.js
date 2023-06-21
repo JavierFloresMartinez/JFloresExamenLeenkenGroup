@@ -20,7 +20,6 @@ function GetAll() {
                     + "<td class='text-center'>" + empleado.Nombre +" " + empleado.ApellidoPaterno + " " + empleado.ApellidoMaterno + "</td>"
                     + "<td class='text-center'>" + empleado.Estado.Nombre + "</td>"
                     + '<td class="text-center"> <button class="btn btn-danger" onclick="Eliminar(' + empleado.IdEmpleado + ')"><span class="glyphicon glyphicon-trash" style="color:#FFFFFF"></span></button></td>'
-
                     + "</tr>";
                 $("#Empleado tbody").append(filas);
             });
@@ -39,7 +38,6 @@ function EstadoGetAll() {
             $("#ddlEstado").append('<option value="' + 0 + '">' + 'Seleccione una opción' + '</option>');
             $.each(result.Objects, function (i, estado) {
                 $("#ddlEstado").append('<option value="'+ estado.IdEstado + '">' + estado.Nombre + '</option>');
-                //<option value="javascript">JavaScript</option>
             });
         }
     });
@@ -51,6 +49,20 @@ function AbrirModal() {
 
 function CerrarModal() {
     $('#modalPromociones').modal('hide');
+    $('#ddlEstado').empty();
+    $('#modalPromociones').click(function () {
+        $('input[type="text"]').val('')
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:59638/api/Estado/GetAll',
+            success: function (result) {
+                $("#ddlEstado").append('<option value="' + 0 + '">' + 'Seleccione una opción' + '</option>');
+                $.each(result.Objects, function (i, estado) {
+                    $("#ddlEstado").append('<option value="' + estado.IdEstado + '">' + estado.Nombre + '</option>');
+                });
+            }
+        });
+    });
 }
 
 
@@ -78,8 +90,6 @@ function Modal() {
                 alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
             }
         });
-
-        $("#modalPromociones").reset();
     }
     else {
         var empleado = {
