@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Empleado:</h2>
+            <hr />
+        </div>
+
+    </div>
+
+</div>
+<br />
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Scripts/EmpleadoCrud/Empleado.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+
+        </div>
+        <div class="col-md-1" style="padding-left:100px">
+            <div class="col-md-3"><button class="btn btn-success" onclick="AbrirModal()">Agregar Empleado</button></div>
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover" border="1" id="Empleado" name="Empleado">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Editar</th>
+                        <th class="text-center" scope="col" style="display :none;">IdEmpleado</th>
+                        <th class="text-center" scope="col">Numero De Nomina</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Estado</th>
+                        <th class="text-center" scope="col">Eliminar</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" id="modalPromociones">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Formulario Nuevo Empleado</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group col-md-6" style="display :none;">
+                        <label>IdEmpleado</label>
+                        <input type="number" class="form-control" id="txtIdEmpleado" name="txtIdEmpleado" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Numero de Nomina</label>
+                        <input type="text" class="form-control" id="txtNumeroNomina" name="txtNumeroNomina" aria-describedby="emailHelp">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Nombre</label>
+                        <input type="text" class="form-control" id="txtNombre" name="txtNombre">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Apellido Paterno</label>
+                        <input type="text" class="form-control" id="txtApellidoPaterno" name="txtApellidoPaterno">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label> Apellido Materno</label>
+                        <input type="text" class="form-control" id="txtApellidoMaterno" name="txtApellidoMaterno">
+                    </div>
+                    <div class="form-group">
+                        <label> Estado</label>
+                        <select id="ddlEstado" name="ddlEstado" class="form-control">
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success" onclick="Modal()">Enviar</button>
+
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="CerrarModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
