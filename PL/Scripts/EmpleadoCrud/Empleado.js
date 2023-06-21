@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     GetAll();
     EstadoGetAll();
-});
+})
 
 
 function GetAll() {
@@ -66,58 +66,67 @@ function CerrarModal() {
 }
 
 
+
+function Add() {
+    var empleado = {
+        IdEmpleado: 0,
+        NumeroNomina: $('#txtNumeroNomina').val(),
+        Nombre: $('#txtNombre').val(),
+        ApellidoPaterno: $('#txtApellidoPaterno').val(),
+        ApellidoMaterno: $('#txtApellidoMaterno').val(),
+        Estado: {
+            IdEstado: $('#ddlEstado').val()
+        }
+    }
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:59638/api/Empleado/Add',
+        dataType: 'json',
+        data: empleado,
+        success: function (result) {
+            alert('Se Ingreso Correctamente el empleado');
+            $('#modal').modal();
+        },
+        error: function (result) {
+            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+        }
+    });
+}
+
+function Update() {
+    var empleado = {
+        IdEmpleado: $('#txtIdEmpleado').val(),
+        NumeroNomina: $('#txtNumeroNomina').val(),
+        Nombre: $('#txtNombre').val(),
+        ApellidoPaterno: $('#txtApellidoPaterno').val(),
+        ApellidoMaterno: $('#txtApellidoMaterno').val(),
+        Estado: {
+            IdEstado: $('#ddlEstado').val()
+        }
+    }
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:59638/api/Empleado/Update',
+        dataType: 'json',
+        data: empleado,
+        success: function (result) {
+            alert('Se actualizo corretamente el empleado');
+            $('#modal').modal();
+        },
+        error: function (result) {
+            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+        }
+    });
+}
+
 function Modal() {
     if ($("#txtIdEmpleado").val() == 0) {
-        var empleado = {
-            IdEmpleado: 0,
-            NumeroNomina: $('#txtNumeroNomina').val(),
-            Nombre: $('#txtNombre').val(),
-            ApellidoPaterno: $('#txtApellidoPaterno').val(),
-            ApellidoMaterno: $('#txtApellidoMaterno').val(),
-            Estado: {
-                IdEstado: $('#ddlEstado').val()
-            }
-        }
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:59638/api/Empleado/Add',
-            dataType: 'json',
-            data: empleado,
-            success: function (result) {
-                $('#modal').modal();
-            },
-            error: function (result) {
-                alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
-            }
-        });
+        Add();
     }
     else {
-        var empleado = {
-            IdEmpleado: $('#txtIdEmpleado').val(),
-            NumeroNomina: $('#txtNumeroNomina').val(),
-            Nombre: $('#txtNombre').val(),
-            ApellidoPaterno: $('#txtApellidoPaterno').val(),
-            ApellidoMaterno: $('#txtApellidoMaterno').val(),
-            Estado: {
-                IdEstado: $('#ddlEstado').val()
-            }
-        }
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:59638/api/Empleado/Update',
-            dataType: 'json',
-            data: empleado,
-            success: function (result) {
-                $('#modal').modal();
-            },
-            error: function (result) {
-                alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
-            }
-        });
-        $("#modalPromociones").reset();
+        Update();
     }
-};
-
+}
 
 function GetById(IdEmpleado) {
     $.ajax({
@@ -154,4 +163,4 @@ function Eliminar(IdEmpleado) {
         });
 
     };
-};
+}
